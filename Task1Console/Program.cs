@@ -32,8 +32,11 @@ namespace Task1Console
             int power = GetInt(false);
             Console.WriteLine("Enter the epsilon:");
             double eps = GetDouble(true);
+
+            double newtonRoot = NewtonRoot.Root(number, power, eps);
+            double mathPow = Math.Pow(number, 1.0 / power);
             Console.WriteLine(
-                $"Root using Newton's algorithm: {NewtonRoot.Root(number, power, eps)}; Math.Pow: {Math.Pow(number, 1.0 / power)}");
+                $"Root using Newton's algorithm: {newtonRoot}; Math.Pow: {mathPow}; difference: {Math.Abs(newtonRoot - mathPow)}");
         }
 
         /// <summary>

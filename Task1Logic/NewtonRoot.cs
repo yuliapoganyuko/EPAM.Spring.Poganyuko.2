@@ -22,15 +22,14 @@ namespace Task1Logic
         /// <returns>n-th root</returns>
         public static double Root(int number, int power, double eps)
         {
-            if (number <= 0)
+            if (number <= 0 || eps <= 0 || eps > 1)
                 throw new ArgumentOutOfRangeException();
-
             return Sqrt(number, power, eps);
         }
 
         #endregion
 
-        #region Public methods
+        #region Private methods
 
         /// <summary>
         /// Counts n-th root using Newton algorithm.
