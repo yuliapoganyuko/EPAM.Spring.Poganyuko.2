@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Task2Logic
 {
@@ -14,12 +15,16 @@ namespace Task2Logic
         /// </summary>
         /// <param name="a">First number</param>
         /// <param name="b">Second number</param>
-        /// <returns>Greatest common divisor</returns>
-        public static int GetGcd(int a, int b)
+        /// <returns>The object of Result class consisting of fields with greatest common divisor and elapsed time</returns>
+        public static Result GetGcd(int a, int b)
         {
             if (a == 0 && b == 0)
                 throw new ArgumentException();
-            return GetEuclidGcd(Math.Abs(a), Math.Abs(b));
+
+            Stopwatch timer = StartTimer();
+            int gcd = GetEuclidGcd(Math.Abs(a), Math.Abs(b));
+            TimeSpan time = StopTimer(timer);
+            return new Result(gcd, time);
         }
 
         /// <summary>
@@ -28,8 +33,8 @@ namespace Task2Logic
         /// <param name="a">First number</param>
         /// <param name="b">Second number</param>
         /// <param name="array">Other numbers</param>
-        /// <returns>Greatest common divisor</returns>
-        public static int GetGcd(int a, int b, params int[] array)
+        /// <returns>The object of Result class consisting of fields with greatest common divisor and elapsed time</returns>
+        public static Result GetGcd(int a, int b, params int[] array)
         {
             if (array == null)
                 throw new ArgumentNullException();
@@ -40,7 +45,10 @@ namespace Task2Logic
                 i++;
             if (i == array.Length)
                 throw new ArgumentException();
-            return GetEuclidGcd(a, b, array);
+            Stopwatch timer = StartTimer();
+            int gcd = GetEuclidGcd(a, b, array);
+            TimeSpan time = StopTimer(timer);
+            return new Result(gcd, time);
         }
 
         /// <summary>
@@ -48,12 +56,15 @@ namespace Task2Logic
         /// </summary>
         /// <param name="a">First number</param>
         /// <param name="b">Second number</param>
-        /// <returns>Greatest common divisor</returns>
-        public static int GetBinaryGcd(int a, int b)
+        /// <returns>The object of Result class consisting of fields with greatest common divisor and elapsed time</returns>
+        public static Result GetBinaryGcd(int a, int b)
         {
             if (a == 0 && b == 0)
                 throw new ArgumentException();
-            return GetGcdByBinaryAlgorithm(Math.Abs(a), Math.Abs(b));
+            Stopwatch timer = StartTimer();
+            int gcd = GetGcdByBinaryAlgorithm(Math.Abs(a), Math.Abs(b));
+            TimeSpan time = StopTimer(timer);
+            return new Result(gcd, time);
         }
 
         /// <summary>
@@ -62,8 +73,8 @@ namespace Task2Logic
         /// <param name="a">First number</param>
         /// <param name="b">Second number</param>
         /// <param name="array">Other numbers</param>
-        /// <returns>Greatest common divisor</returns>
-        public static int GetBinaryGcd(int a, int b, params int[] array)
+        /// <returns>The object of Result class consisting of fields with greatest common divisor and elapsed time</returns>
+        public static Result GetBinaryGcd(int a, int b, params int[] array)
         {
             if (array == null)
                 throw new ArgumentNullException();
@@ -74,7 +85,10 @@ namespace Task2Logic
                 i++;
             if (i == array.Length)
                 throw new ArgumentException();
-            return GetGcdByBinaryAlgorithm(a, b, array);
+            Stopwatch timer = StartTimer();
+            int gcd = GetGcdByBinaryAlgorithm(a, b, array);
+            TimeSpan time = StopTimer(timer);
+            return new Result(gcd, time);
         }
         #endregion
 
@@ -158,6 +172,29 @@ namespace Task2Logic
             }
             return a;
         }
+
+        /// <summary>
+        /// Starts time measuring.
+        /// </summary>
+        /// <returns>Started Stopwatch object</returns>
+        private static Stopwatch StartTimer()
+        {
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+            return timer;
+        }
+
+        /// <summary>
+        /// Stops time measuring.
+        /// </summary>
+        /// <param name="timer">Started Stopwatch object</param>
+        /// <returns>Elapsed time</returns>
+        private static TimeSpan StopTimer(Stopwatch timer)
+        {
+            timer.Stop();
+            return timer.Elapsed;
+        }
+
         #endregion
 
     }

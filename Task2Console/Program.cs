@@ -27,8 +27,10 @@ namespace Task2Console
             int[] array = GetUserInput();
             if (array.Length == 2)
             {
-                Console.WriteLine($"Euclidius algoritmm: {Gcd.GetGcd(array[0], array[1])}");
-                Console.WriteLine($"Binary algoritmm: {Gcd.GetBinaryGcd(array[0], array[1])}");
+                Result resultOfEuclidiusAlgoritmm = Gcd.GetGcd(array[0], array[1]);
+                Result resultOfBinaryAlgoritmm = Gcd.GetBinaryGcd(array[0], array[1]);
+                Console.WriteLine($"Euclidius algoritmm: {resultOfEuclidiusAlgoritmm.Gcd.ToString()}; elapsed time: {resultOfEuclidiusAlgoritmm.Time.TotalMilliseconds.ToString()}");
+                Console.WriteLine($"Binary algoritmm: {resultOfBinaryAlgoritmm.Gcd.ToString()}; elapsed time: {resultOfBinaryAlgoritmm.Time.TotalMilliseconds.ToString()}");
             }
             else
             {
@@ -36,8 +38,10 @@ namespace Task2Console
                 int[] newArray = new int[array.Length - 2];
                 for (int i = 0; i < newArray.Length; i++)
                     newArray[i] = array[i + 2];
-                Console.WriteLine($"Euclidius algoritmm: {Gcd.GetGcd(a, b, newArray)}");
-                Console.WriteLine($"Binary algoritmm: {Gcd.GetBinaryGcd(a, b, newArray)}");
+                Result resultOfEuclidiusAlgoritmm = Gcd.GetGcd(a, b, newArray);
+                Result resultOfBinaryAlgoritmm = Gcd.GetBinaryGcd(a, b, newArray);
+                Console.WriteLine($"Euclidius algoritmm: {resultOfEuclidiusAlgoritmm.Gcd.ToString()}; elapsed time: {resultOfEuclidiusAlgoritmm.Time.TotalMilliseconds.ToString()}");
+                Console.WriteLine($"Binary algoritmm: {resultOfBinaryAlgoritmm.Gcd.ToString()}; elapsed time: {resultOfBinaryAlgoritmm.Time.TotalMilliseconds.ToString()}");
             }
         }
 
