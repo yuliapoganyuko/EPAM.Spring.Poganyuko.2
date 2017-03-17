@@ -19,7 +19,7 @@ namespace Task2Logic
         {
             if (a == 0 && b == 0)
                 throw new ArgumentException();
-            return GetEuclidGcd(a,b);
+            return GetEuclidGcd(Math.Abs(a), Math.Abs(b));
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Task2Logic
         {
             if (a == 0 && b == 0)
                 throw new ArgumentException();
-            return GetGcdByBinaryAlgorithm(a, b);
+            return GetGcdByBinaryAlgorithm(Math.Abs(a), Math.Abs(b));
         }
 
         /// <summary>
@@ -107,10 +107,10 @@ namespace Task2Logic
         /// <returns>Greatest common divisor</returns>
         private static int GetEuclidGcd(int a, int b, params int[] array)
         {
-            a = GetEuclidGcd(a, b);
+            a = GetEuclidGcd(Math.Abs(a), Math.Abs(b));
             for (int i = 0; i < array.Length; i++)
             {
-                a = GetEuclidGcd(a, array[i]);
+                a = GetEuclidGcd(a, Math.Abs(array[i]));
             }
             return a;
         }
@@ -129,29 +129,17 @@ namespace Task2Logic
                 return b;
             if (b == 0)
                 return a;
-            //if ((~a & 1) != 0)
-            //{
-            //    if ((b & 1) != 0)
-            //        return GetBinaryGcd(a >> 1, b);
-            //    else
-            //        return GetBinaryGcd(a >> 1, b >> 1) << 1;
-            //}
-            //if ((~b & 1) != 0)
-            //    return GetBinaryGcd(a, b >> 1);
-            //if (a > b)
-            //    return GetBinaryGcd((a - b) >> 1, b);
-            //return GetBinaryGcd((b - a) >> 1, a);
             if ((~a & 1) != 0)
             {
                 if ((b & 1) != 0)
-                    return GetBinaryGcd(a >> 1, b);
-                return GetBinaryGcd(a >> 1, b >> 1) << 1;
+                    return GetGcdByBinaryAlgorithm(a >> 1, b);
+                return GetGcdByBinaryAlgorithm(a >> 1, b >> 1) << 1;
             }
             if ((~b & 1) != 0)
-                return GetBinaryGcd(a, b >> 1);
+                return GetGcdByBinaryAlgorithm(a, b >> 1);
             if (a > b)
-                return GetBinaryGcd((a - b) >> 1, b);
-            return GetBinaryGcd((b - a) >> 1, a);
+                return GetGcdByBinaryAlgorithm((a - b) >> 1, b);
+            return GetGcdByBinaryAlgorithm((b - a) >> 1, a);
         }
 
         /// <summary>
@@ -163,10 +151,10 @@ namespace Task2Logic
         /// <returns>Greatest common divisor</returns>
         private static int GetGcdByBinaryAlgorithm(int a, int b, params int[] array)
         {
-            a = GetGcdByBinaryAlgorithm(a, b);
+            a = GetGcdByBinaryAlgorithm(Math.Abs(a), Math.Abs(b));
             for (int i = 0; i < array.Length; i++)
             {
-                a = GetGcdByBinaryAlgorithm(a, array[i]);
+                a = GetGcdByBinaryAlgorithm(Math.Abs(a), Math.Abs(array[i]));
             }
             return a;
         }
